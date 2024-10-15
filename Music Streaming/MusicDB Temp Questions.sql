@@ -5,12 +5,12 @@ USE [MusicDB]
 
 ----- 21 Quais são as músicas mais ouvidas, por utilizador nos Estados Unidos da America? 
 
-SELECT u,m,c from
+SELECT Username,Music,TimesPlayed from
 (
 SELECT 
-	Username as 'u', 
-	musicname as 'm',
-	COUNT(*) as 'c',
+	Username as 'Username', 
+	musicname as 'Music',
+	COUNT(*) as 'TimesPlayed',
 	RANK() OVER (partition by username order by COUNT(*) DESC) as RANKE
 FROM  
 	##HistoryUSA
@@ -18,16 +18,16 @@ FROM
  ) as sub
 
  where RANKE=1 
- order by c desc
+ order by 'Times Played' desc
  GO
 ----- 22 Quais são as músicas mais ouvidas, por utilizador, entre as 08:00 e as 16:00 nos Estados Unidos da America ? 
 
-SELECT u,m,c from
+SELECT Username,Music,TimesPlayed from
 (
 SELECT 
-	Username as 'u', 
-	musicname as 'm',
-	COUNT(*) as 'c',
+	Username as 'Username', 
+	musicname as 'Music',
+	COUNT(*) as TimesPlayed,
 	RANK() OVER (partition by username order by COUNT(*) DESC) as RANKE
 FROM  
 	##HistoryUSA
@@ -39,18 +39,18 @@ FROM
  ) as sub
 
  where RANKE=1 
- order by c desc
+ order by TimesPlayed desc
  GO
 
 
 ----- 23 Quais são as músicas mais ouvidas, por utilizador, entre as 16:00 e as 24:00 nos Estados Unidos da America  ?
 
-SELECT u,m,c from
+SELECT Username,Music,TimesPlayed from
 (
 SELECT 
-	Username as 'u', 
-	musicname as 'm',
-	COUNT(*) as 'c',
+	Username as 'Username', 
+	musicname as 'Music',
+	COUNT(*) as TimesPlayed,
 	RANK() OVER (partition by username order by COUNT(*) DESC) as RANKE
 FROM  
 	##HistoryUSA
@@ -62,7 +62,7 @@ FROM
  ) as sub
 
  where RANKE=1 
- order by c desc
+ order by TimesPlayed desc
  GO
 
 
